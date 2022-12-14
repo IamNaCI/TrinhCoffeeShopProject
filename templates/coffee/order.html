@@ -1,0 +1,258 @@
+{% extends "coffee/base.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+{% block title %}
+    Cafe Cà phê
+{% endblock %}
+
+{% block navbar %}
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark mb-4" >
+        <div class="d-flex">
+            <a class="navbar-brand" href="{% url 'index' %}"><img src="{% static 'images/CoffeeLogo.png' %}" alt="my logo" style="width: 100px; padding-left: 5%"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'menu' %}">Menu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'register' %}">Register</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            Welcome!
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            {% if user.is_authenticated %}
+                                <li><a class="dropdown-item" href="{% url 'order' %}">Start your order {{ user.username }}</a></li>
+                                <li><a class="dropdown-item" href="{% url 'logout' %}">Logout, {{ user.username }}</a></li>
+                            {% else %}
+                                <li><a class="dropdown-item" href="{% url 'login' %}">Log in</a></li>
+                            {% endif %}
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+{% endblock %}
+
+{% block banner %}
+    <img src="{% static 'images/pexels-nguyễn-khanh-2221925.jpg' %}" class="img-fluid" alt="menu img" style="height: 800px; width: 100%">
+{% endblock %}
+
+{% block textbanner %}
+    <h2 class="text-center text-uppercase my-4 display-3">Order here</h2>
+{% endblock %}
+
+
+{% block form %}
+    <div class="container my-3 mx-auto">
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="form-group py-2">
+                <label for="FormControlInput1">Name</label>
+                <input name="name" type="text" class="form-control" id="FormControlInput1" placeholder="(First and last)">
+            </div>
+
+            <div class="form-group py-2">
+                <label for="FormControlInput1">Email</label>
+                <input name="email" type="email" class="form-control" id="FormControlInput1" placeholder="Your E-mail Address (example@gmail.com)">
+            </div>
+
+            <div class="form-group py-2">
+                <label for="FormControlInput1">Phone Number</label>
+                <input name="phone" type="text" class="form-control" id="FormControlInput1" placeholder="Your phone number ( (area code)-XXX-XXXX)">
+            </div>
+
+            <label for="drink-select" name="drinkSelect">Choose a drink:</label>
+            <select class="form-select" aria-label="Default select example" id="drink-select">
+                <option selected>What would you like to drink?</option>
+                <option value="ca phe">Cà phê</option>
+                <option value="black coffee">Black Coffee</option>
+                <option value="latte">Latte</option>
+                <option value="macchiato">Macchiato</option>
+                <option value="cappuccino">Cappuccino</option>
+                <option value="cortado">Cortado</option>
+                <option value="cold brew">Cold Brew</option>
+                <option value="lemonade">Lemonade</option>
+                <option value="hot chocolate">Hot Chocolate</option>
+                <option value="tea">Tea</option>
+                <option value="thai iced tea">Thai Iced Tea</option>
+            </select>
+            <select class="form-select my-3" aria-label="Default select example" id="sugar-select" name="sugarSelect">
+                <option selected>How sweet would you like your drink?</option>
+                <option value="none">None</option>
+                <option value="less">Less</option>
+                <option value="regular">Regular</option>
+                <option value="extra">Extra</option>
+            </select>
+            <select class="form-select my-3" aria-label="Default select example" id="size-select" name="sizeSelect">
+                <option selected>What size drink?</option>
+                <option value="small">Small</option>
+                <option value="medium">Medium</option>
+                <option value="large">Large</option>
+                <option value="extra">Xtra Large</option>
+            </select>
+            <select class="form-select my-3" aria-label="Default select example" id="hotcold-select" name="hotorIce">
+                <option selected>Would you like your drink hot or iced?</option>
+                <option value="hot">Hot</option>
+                <option value="iced">Iced</option>
+            </select>
+            <select class="form-select my-3" aria-label="Default select example" id="ice-select" name="iceSelect">
+                <option selected>How much ice would you like in your drink?</option>
+                <option value="none">None</option>
+                <option value="less">Less</option>
+                <option value="regular">Regular</option>
+                <option value="extra">Extra</option>
+            </select>
+            <label for="snack-select">Choose a snack</label>
+            <select class="form-select" aria-label="Default select example" id="snack-select">
+                <option selected>What would you like to eat?</option>
+                <option value="plain">Plain donut</option>
+                <option value="sugar">Sugar donut</option>
+                <option value="chocolate">Chocolate donut</option>
+                <option value="che thai">Chè Thái</option>
+                <option value="banh bao">Bánh bao</option>
+                <option value="banh cam">Bánh Cam</option>
+            </select>
+
+            <div class="form-group py-2">
+                <label for="FormControlTextarea1">Message</label>
+                <textarea name="message" class="form-control" id="FormControlTextarea1" placeholder="Your message here"></textarea>
+            </div>
+            <a href="{% url 'menu' %}" class="btn btn-info"><i class="fas fa-arrow-left"></i> Go Back</a>
+            <button type="reset" class="btn btn-warning"><i class="fas fa-redo-alt"></i> Reset</button>
+            <input type="submit" id="OrderSubmit" value="Submit" class="btn btn-secondary my-3" onclick="alert('Thankyou for submitting your Order information! You will receive a status update shortly. You may close out of this page')"/>
+        </form>
+    </div>
+{% endblock %}
+
+{% block body %}
+
+    <h2 class="text-center text-uppercase my-4 display-3">Order Summary</h2>
+
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Product</th>
+            <th scope="col">Update</th>
+            <th scope="col">Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for order in order %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ order.name }}</td>
+                <td>{{ order.email }}</td>
+                <td>{{ order.phone_number }}</td>
+                <td>${{ order.drink }}</td>
+                <td>${{ order.sugar }}</td>
+                <td>{{ order.size }}</td>
+                <td>{{ order.style }}</td>
+                <td>${{ order.ice }}</td>
+                <td>
+                    <a href="{% url 'order' order.id %}" class="update-icon">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </a>
+                </td>
+                <td>
+                    <a href="{% url 'order' order.id %}" class="delete-icon">
+                        <i class="fa-solid fa-trash"></i>
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
+
+
+{% block footer %}
+    <footer class="text-center text-white" style="background-color: #C8102E">
+        <div class="container">
+            <section class="mt-5">
+                <div class="row text-center d-flex justify-content-center pt-5">
+                    <div class="col-md-2">
+                        <h6 class="text-uppercase font-weight-bold">
+                            <a href="{% url 'index' %}" class="text-white">Home</a>
+                        </h6>
+                    </div>
+                    <div class="col-md-2">
+                        <h6 class="text-uppercase font-weight-bold">
+                            <a href="{% url 'menu' %}" class="text-white">Menu</a>
+                        </h6>
+                    </div>
+                    <div class="col-md-2">
+                        <h6 class="text-uppercase font-weight-bold">
+                            <a href="{% url 'order' %}" class="text-white">Order</a>
+                        </h6>
+                    </div>
+                    <div class="col-md-2">
+                        <h6 class="text-uppercase font-weight-bold">
+                            <a href="{% url 'contact' %}" class="text-white">Contact</a>
+                        </h6>
+                    </div>
+                    <div class="col-md-2">
+                        <h6 class="text-uppercase font-weight-bold">
+                            <a href="{% url 'register' %}" class="text-white">Register</a>
+                        </h6>
+                    </div>
+                </div>
+            </section>
+            <hr class="my-5"/>
+            <section class="mb-5">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-lg-8">
+                        <p>
+                            Designed and developed by Rocky Trinh. All images are from <a href="https://www.pexels.com/">Pexels</a>
+
+                        </p>
+                        <p>Logo Image by <a href="https://www.freepik.com/free-vector/gradient-cafe-signage-design_23151275.htm#query=coffee%20logo&position=43&from_view=search&track=sph">Freepik</a></p>
+                    </div>
+                </div>
+            </section>
+            <section class="text-center mb-5">
+                <a href="" class="text-white me-4">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="" class="text-white me-4">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="" class="text-white me-4">
+                    <i class="fab fa-google"></i>
+                </a>
+                <a href="" class="text-white me-4">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="" class="text-white me-4">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="" class="text-white me-4">
+                    <i class="fab fa-github"></i>
+                </a>
+            </section>
+        </div>
+        <div
+                class="text-center p-3"
+                style="background-color: rgba(0, 0, 0, 0.2)"
+        >
+        </div>
+    </footer>
+{% endblock %}
+</html>

@@ -1,0 +1,251 @@
+{% extends "coffee/base.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+{% block title %}
+    Cafe Cà phê
+{% endblock %}
+
+{% block navbar %}
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark mb-4" >
+        <div class="d-flex">
+            <a class="navbar-brand" href="{% url 'index' %}"><img src="{% static 'images/CoffeeLogo.png' %}" alt="my logo" style="width: 100px; padding-left: 5%"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'menu' %}">Menu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'register' %}">Register</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            Welcome!
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            {% if user.is_authenticated %}
+                            <li><a class="dropdown-item" href="{% url 'order' %}">Start your order {{ user.username }}</a></li>
+                            <li><a class="dropdown-item" href="{% url 'logout' %}">Logout, {{ user.username }}</a></li>
+                            {% else %}
+                            <li><a class="dropdown-item" href="{% url 'login' %}">Log in</a></li>
+                            {% endif %}
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+{% endblock %}
+
+{% block banner %}
+    <img src="{% static 'images/pexels-klaus-nielsen-6287292.jpg' %}" class="img-fluid" alt="menu img" style="height: 800px; width: 100%">
+{% endblock %}
+
+{% block textbanner %}
+    <h1 class="text-center text-uppercase my-4"><u>Coffee * can be made hot or cold</u></h1>
+{% endblock %}
+
+{% block body %}
+    <!-- Columns are always 50% wide, on mobile and desktop This is for the coffee section-->
+    <div class="d-flex flex-column">
+        <div class="row align-content-center mx-auto">
+            <div class="col-4 mx-auto">
+                <div class="card">
+                    <img class="card-img-top img-fluid" src="{% static 'images/pexels-nikita-belokhonov-6036281.jpg' %}" alt="Classic viet coffee">
+                    <div class="card-body">
+                        <p class="card-text">Traditional Vietnamese style iced coffee, just the way mom makes it. Made with Vietnamese phin drip robusta coffee, condensed milk, and ice.</p>
+                    </div>
+                </div>
+                <div class="card" >
+                    <img class="card-img-top img-fluid" src="{% static 'images/pexels-andrew-neel-4264049.jpg' %}" alt="Black Coffee">
+                    <div class="card-body">
+                        <p class="card-text text-center">Black coffee</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4 mx-auto">
+                <div class="card" >
+                    <img class="card-img-top img-fluid" src="{% static 'images/pexels-chevanon-photography-312418.jpg' %}" alt="Latte">
+                    <div class="card-body">
+                        <p class="card-text text-center">Latte</p>
+                    </div>
+                </div>
+                <div class="card" >
+                    <img class="card-img-top img-fluid" src="{% static 'images/pexels-hatice-baran-13510337.jpg' %}" alt="Macchiato">
+                    <div class="card-body">
+                        <p class="card-text text-center">Macchiato</p>
+                    </div>
+                </div>
+                <div class="card" >
+                    <img class="card-img-top img-fluid" src="{% static 'images/pexels-anna-urlapova-2956954.jpg' %}" alt="Cappuccino">
+                    <div class="card-body">
+                        <p class="card-text text-center">Cappuccino</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4 mx-auto">
+                <div class="card" >
+                    <img class="card-img-top img-fluid" src="{% static 'images/pexels-tyler-nix-2396220.jpg' %}" alt="Cortado">
+                    <div class="card-body">
+                        <p class="card-text text-center">Cortado</p>
+                    </div>
+                </div>
+                <div class="card" >
+                    <img class="card-img-top img-fluid" src="{% static 'images/pexels-charlotte-may-5946968.jpg' %}" alt="Cold Brew">
+                    <div class="card-body">
+                        <p class="card-text text-center">Cold brew</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- not coffee section -->
+        <h1 class="text-center text-uppercase my-4"><u>Not coffee</u></h1>
+        <div class="row align-content-center mx-auto">
+            <div class="col-6">
+                <div class="card" >
+                    <img class="card-img-top img-fluid" src="{% static 'images/pexels-charlotte-may-5946965.jpg' %}" alt="Tea">
+                    <div class="card-body">
+                        <p class="card-text text-center">Tea</p>
+                    </div>
+                </div>
+                <div class="card" >
+                    <img class="card-img-top img-fluid" src="{% static 'images/pexels-olena-bohovyk-12900913.jpg' %}" alt="Thai iced Tea">
+                    <div class="card-body">
+                        <p class="card-text text-center">Thai Iced Tea</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 mx-auto">
+                <div class="card" >
+                    <img class="card-img-top img-fluid" src="{% static 'images/pexels-designbyja-2109099.jpg' %}" alt="Lemonade">
+                    <div class="card-body">
+                        <p class="card-text text-center">Lemonade</p>
+                    </div>
+                </div>
+                <div class="card" >
+                    <img class="card-img-top img-fluid" src="{% static 'images/pexels-fallon-michael-3551717.jpg' %}" alt="Hot Chocolate">
+                    <div class="card-body">
+                        <p class="card-text text-center">Hot Chocolate</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Snack section -->
+        <h1 class="text-center text-uppercase my-4"><u>Snacks</u></h1>
+        <div class="row align-content-center mx-auto">
+            <div class="col-6">
+                <div class="card">
+                    <img class="card-img-top img-fluid" src="{% static 'images/pexels-the-th-179907.jpg' %}" alt="Donut">
+                    <div class="card-body">
+                        <p class="card-text">Chocolate, plain, sugar</p>
+                    </div>
+                </div>
+                <div class="card" >
+                    <div class="card-body">
+                        <p class="card-text">Chè Thái, a sweet Vietnamese fruit cocktail with lychee, jackfruit, and coconut milk.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 mx-auto">
+                <div class="card" >
+                    <img class="card-img-top img-fluid" src="{% static 'images/pexels-angela-roma-7364040.jpg' %}" alt="Latte">
+                    <div class="card-body">
+                        <p class="card-text">Bánh bao, a Vietnamese bun that contains pork or chicken, onions, hard-boiled eggs, chinese sausage, and veggies. </p>
+                    </div>
+                </div>
+                <div class="card" >
+                    <div class="card-body">
+                        <p class="card-text">Bánh Cam, a deep-fried glutenous rice ball covered with sesame seeds. Filled with sweet mung beans.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    <footer class="text-center text-white" style="background-color: #C8102E">
+        <div class="container">
+            <section class="mt-5">
+                <div class="row text-center d-flex justify-content-center pt-5">
+                    <div class="col-md-2">
+                        <h6 class="text-uppercase font-weight-bold">
+                            <a href="{% url 'index' %}" class="text-white">Home</a>
+                        </h6>
+                    </div>
+                    <div class="col-md-2">
+                        <h6 class="text-uppercase font-weight-bold">
+                            <a href="{% url 'menu' %}" class="text-white">Menu</a>
+                        </h6>
+                    </div>
+                    <div class="col-md-2">
+                        <h6 class="text-uppercase font-weight-bold">
+                            <a href="{% url 'order' %}" class="text-white">Order</a>
+                        </h6>
+                    </div>
+                    <div class="col-md-2">
+                        <h6 class="text-uppercase font-weight-bold">
+                            <a href="{% url 'contact' %}" class="text-white">Contact</a>
+                        </h6>
+                    </div>
+                    <div class="col-md-2">
+                        <h6 class="text-uppercase font-weight-bold">
+                            <a href="{% url 'register' %}" class="text-white">Register</a>
+                        </h6>
+                    </div>
+                </div>
+            </section>
+            <hr class="my-5"/>
+            <section class="mb-5">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-lg-8">
+                        <p>
+                            Designed and developed by Rocky Trinh. All images are from <a href="https://www.pexels.com/">Pexels</a>
+
+                        </p>
+                        <p>Logo Image by <a href="https://www.freepik.com/free-vector/gradient-cafe-signage-design_23151275.htm#query=coffee%20logo&position=43&from_view=search&track=sph">Freepik</a></p>
+                    </div>
+                </div>
+            </section>
+            <section class="text-center mb-5">
+                <a href="" class="text-white me-4">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="" class="text-white me-4">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="" class="text-white me-4">
+                    <i class="fab fa-google"></i>
+                </a>
+                <a href="" class="text-white me-4">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="" class="text-white me-4">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="" class="text-white me-4">
+                    <i class="fab fa-github"></i>
+                </a>
+            </section>
+        </div>
+        <div
+                class="text-center p-3"
+                style="background-color: rgba(0, 0, 0, 0.2)"
+        >
+        </div>
+    </footer>
+{% endblock %}
+
+</html>

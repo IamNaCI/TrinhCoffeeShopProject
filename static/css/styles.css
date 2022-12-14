@@ -1,0 +1,97 @@
+h1{
+    color: #ffcd00;
+    background: rgba(218, 37, 29, 0.7) /* White background with 50% opacity */
+
+}
+
+h3{
+    color: #ffcd00;
+    background: rgba(218, 37, 29, 0.7) /* White background with 50% opacity */
+}
+
+h2{
+    font-family: "Calibri Light";
+}
+
+body{
+    font-family:'Coiny', cursive;
+    font-size: 25px;
+}
+
+.carousel-inner .carousel-caption{
+    padding-bottom: 250px;
+}
+.carousel-inner .carousel-caption h1{
+    font-size: 52px;
+}
+
+.carouselExampleCaptions{
+    color: #d9586d;
+}
+
+.nav-item{
+    font-size: 30px;
+    margin: 10px;
+    padding: 20px 20px 20px 15%;
+}
+
+.dropdown-item{
+    font-size: 20px;
+
+}
+
+.card{
+    width: 25rem;
+    margin: 20px;
+}
+
+.card-columns{
+    column-count: 3;
+    display: inline-block;
+    -webkit-column-break-inside: avoid;
+    justify-content: center;
+}
+
+.col-6, .col-4{
+    font-family: "Calibri Light";
+}
+
+
+.navbar-inner{
+    background: transparent;
+}
+
+.carousel-inner .carousel-caption .button{
+    font-weight: 600;
+    font-size: 40px;
+    letter-spacing: 1px;
+    display: inline-block;
+    padding: 10px 30px;
+    border-radius: 50px;
+    transition: 0.5s;
+    border: 2px solid #3489bd;
+    text-decoration: none;
+    background-color: #3489bd;
+    color: #fff;
+}
+
+/* animated css */
+.animate__animated.animate__zoomIn{
+    --animate-delay: 1.7s;
+    --animate-duration: 1.2s
+}
+.animate__animated.animate__bounce{
+    --animate-delay: 1s;
+    --animate-duration: 1.5s
+}
+
+.animate__animated.animate__fadeInDown{
+    --animate-delay: 1s;
+    --animate-duration: 1.5s
+}
+
+.animate__animated.animate__fadeInRight
+{
+    --animate-delay: 1s;
+    --animate-duration: 1.5s
+}
